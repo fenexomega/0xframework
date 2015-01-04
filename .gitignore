@@ -28,3 +28,4 @@ install_manifest.txt
 *.out
 *.app
 0xframework*
+build/
