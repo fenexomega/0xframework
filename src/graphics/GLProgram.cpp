@@ -1,5 +1,8 @@
 #include "GLProgram.h"
 
+#include <memory>
+#include "utils/Logger.h"
+
 GLProgram::GLProgram()
 {
     this->programID = glCreateProgram();
@@ -54,6 +57,53 @@ GLint GLProgram::DisableAttrib(std::string attrib)
     glDisableVertexAttribArray(num);
     return num;
 
+}
+
+void GLProgram::PrintActiveVertexInput()
+{
+    GLint maxLenght, nAttribs;
+    glGetProgramiv(programID,GL_ACTIVE_ATTRIBUTES,&nAttribs);
+    glGetProgramiv(programID,GL_ACTIVE_ATTRIBUTE_MAX_LENGTH,&maxLenght);
+    GLchar * name = new GLchar[maxLenght];
+
+    GLint written, size,location;
+    GLenum type;
+    LOG("-------------------------------------");
+    LOG("PRITING ACTIVE ATTRIBUTES VARIABLES");
+    LOG("-------------------------------------");
+    for (int i = 0; i < nAttribs; ++i)
+    {
+        glGetActiveAttrib(programID,i,maxLenght, &written,&size,&type,name);
+        location = glGetAttribLocation(programID,name);
+        std::string sname(name);
+        LOG(TOSTR(location) + " : "  + (sname));
+
+    }
+    delete name;
+
+}
+
+void GLProgram::PrintActiveUniforms()
+{
+    GLint maxLenght, nAttribs;
+    glGetProgramiv(programID,GL_ACTIVE_UNIFORMS,&nAttribs);
+    glGetProgramiv(programID,GL_ACTIVE_UNIFORM_MAX_LENGTH,&maxLenght);
+    GLchar * name = new GLchar[maxLenght];
+
+    GLint written, size,location;
+    GLenum type;
+    LOG("-------------------------------------");
+    LOG("PRITING ACTIVE UNIFORMS");
+    LOG("-------------------------------------");
+    for (int i = 0; i < nAttribs; ++i)
+    {
+        glGetActiveUniform(programID,i,maxLenght, &written,&size,&type,name);
+        location = glGetUniformLocation(programID,name);
+        std::string sname(name);
+        LOG(TOSTR(location) + " : "  + (sname));
+
+    }
+    delete name;
 }
 
 

@@ -56,6 +56,9 @@ void MyGame::init()
 
     glVertexAttribPointer(posAttrib,2,GL_FLOAT,GL_FALSE,5*sizeof(GLfloat),0);
     glVertexAttribPointer(colorAttrib,3,GL_FLOAT,GL_FALSE,5*sizeof(GLfloat),(void *)(3*sizeof(GLfloat)));
+
+    program->PrintActiveVertexInput();
+    program->PrintActiveUniforms();
 }
 
 void MyGame::update()

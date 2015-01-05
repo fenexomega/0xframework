@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 include(sources.cmake)
 set(SRC_LIST ${ENGINE_SOURCES} ${GAME_SHADERS} ${ENGINE_HEADERS})
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeInclude)
+set(CMAKE_BUILD_TYPE Debug CACHE STRING "Type of build: release of debug" )
 
 
 file(COPY ${GAME_SHADERS} DESTINATION ${CMAKE_CURRENT_BINARY_DIR} )
@@ -29,9 +30,8 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     set(CMAKE_CXX_FLAGS "-std=c++11 -rdynamic")
 endif()
 
-if(NOT CMAKE_BUILD_TYPE )
+if(CMAKE_BUILD_TYPE STREQUAL "Debug" )
 	message("Building the debug version")
-        set(CMAKE_BUILD_TYPE Debug CACHE STRING "Type of build: release of debug" FORCE)
 else()
 	add_definitions(-DRELEASE)
 endif()

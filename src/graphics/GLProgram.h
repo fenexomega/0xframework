@@ -25,7 +25,9 @@ public:
 
     GLint DisableAttrib(std::string attrib);
 
+    void PrintActiveVertexInput();
 
+    void PrintActiveUniforms();
 
     void BindFragDataLocation(std::string frag,GLuint colorNumber);
 
