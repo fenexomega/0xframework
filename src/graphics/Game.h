@@ -1,5 +1,5 @@
-#ifndef GAME
-#define GAME
+#ifndef PAGE38
+#define PAGE38
 
 class Game
 {
@@ -10,5 +10,5 @@ class Game
     virtual void Update() = 0;
 };
 
-#endif // GAME
+#endif // PAGE38
 

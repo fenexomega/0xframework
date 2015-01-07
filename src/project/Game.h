@@ -1,5 +1,5 @@
-#ifndef GAME
-#define GAME
+#ifndef PAGE38
+#define PAGE38
 
 
 class Game
@@ -9,13 +9,13 @@ protected:
 
 public:
 
-        virtual void update() = 0;
+    virtual void init() = 0;
 
-	virtual void draw() = 0;
+    virtual void update() = 0;
 
 	virtual void pause() = 0;
 
-	virtual void init() = 0;
+    virtual void draw() = 0;
 
 	virtual void dispose() = 0;
 

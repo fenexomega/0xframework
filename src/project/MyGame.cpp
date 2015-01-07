@@ -4,7 +4,6 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "graphics/Window.h"
-#include "input/sysInput.h"
 
 
 MyGame::MyGame()
@@ -55,7 +54,7 @@ void MyGame::init()
     GLuint colorAttrib = program->EnableAttrib("color");
 
     glVertexAttribPointer(posAttrib,2,GL_FLOAT,GL_FALSE,5*sizeof(GLfloat),0);
-    glVertexAttribPointer(colorAttrib,3,GL_FLOAT,GL_FALSE,5*sizeof(GLfloat),(void *)(3*sizeof(GLfloat)));
+    glVertexAttribPointer(colorAttrib,3,GL_FLOAT,GL_FALSE,5*sizeof(GLfloat),(void *)(2*sizeof(GLfloat)));
 
     program->PrintActiveVertexInput();
     program->PrintActiveUniforms();
