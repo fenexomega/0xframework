@@ -4,7 +4,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "graphics/Window.h"
-
+#include "graphics/Mesh.h"
 
 MyGame::MyGame()
 {

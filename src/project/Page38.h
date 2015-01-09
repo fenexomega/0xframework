@@ -11,6 +11,8 @@ class Page38 : public Game
 private:
     glm::mat4 proj,view;
     GLProgram *program;
+    GLuint vbo,vao,ebo;
+    GLuint blockIndex,ubo;
 public:
     Page38();
     ~Page38();

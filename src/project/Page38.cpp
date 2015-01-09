@@ -4,6 +4,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <algorithm>
 
 Page38::Page38()
 {
@@ -28,10 +29,10 @@ void Page38::init()
 
 
     GLfloat vertex[] = {
-         1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-        -1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-        -1.0f,-1.0f, 1.0f, 0.0f, 0.0f,
-         1.0f,-1.0f, 1.0f, 0.0f, 0.0f
+         1.0f, 1.0f, 1.0f, 1.0f,
+        -1.0f, 1.0f, 0.0f, 1.0f,
+        -1.0f,-1.0f, 0.0f, 0.0f,
+         1.0f,-1.0f, 1.0f, 0.0f,
     };
 
     GLuint elements[] =
@@ -40,16 +41,13 @@ void Page38::init()
         2,3,0
     };
 
-    GLuint vao;
     glGenVertexArrays(1,&vao);
     glBindVertexArray(vao);
 
-    GLuint vbo;
     glGenBuffers(1,&vbo);
     glBindBuffer(GL_ARRAY_BUFFER,vbo);
     glBufferData(GL_ARRAY_BUFFER,sizeof(vertex),vertex,GL_STATIC_DRAW);
 
-    GLuint ebo;
     glGenBuffers(1,&ebo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(elements),elements,GL_STATIC_DRAW);
@@ -66,10 +64,37 @@ void Page38::init()
     program->EnableAttrib("position");
     program->EnableAttrib("TexCoord");
 
-    glVertexAttribPointer(0 , 2,GL_FLOAT,GL_FALSE,5*sizeof(GLfloat),0);
-    glVertexAttribPointer(1 , 3,GL_FLOAT,GL_FALSE,5*sizeof(GLfloat),(void*)(2*sizeof(GLfloat)));
+    glVertexAttribPointer(0 , 2,GL_FLOAT,GL_FALSE,4*sizeof(GLfloat),0);
+    glVertexAttribPointer(1 , 2,GL_FLOAT,GL_FALSE,4*sizeof(GLfloat),(void*)(2*sizeof(GLfloat)));
     program->PrintActiveVertexInput();
     program->PrintActiveUniforms();
+
+    //THIS IS NEW
+    blockIndex = glGetUniformBlockIndex(program->getId(),"blobSettings");
+    GLint blocksize;
+    glGetActiveUniformBlockiv(program->getId(),blockIndex,GL_UNIFORM_BLOCK_DATA_SIZE,&blocksize);
+    GLubyte * blockbuffer = new GLubyte[blocksize];
+    const GLchar *names[]  = {"InnerColor","OuterColor","RadiusInner","RadiusOuter"};
+    GLuint indices[4];
+    glGetUniformIndices(program->getId(),4,names,indices);
+    GLint offset[4];
+    glGetActiveUniformsiv(program->getId(),4,indices,GL_UNIFORM_OFFSET,offset);
+    GLfloat InnerColor[] = {1.0f,1.0f,0.75f,1.0f};
+    GLfloat OuterColor[] = {0.0f,0.0f,0.0f,1.0f};
+    GLfloat InnerRadius = 0.25f, OuterRadius = 0.45f;
+
+    //Colocar os dados dentro da var
+
+    memcpy(blockbuffer + offset[0],InnerColor,4*sizeof(GLfloat));
+    memcpy(blockbuffer + offset[1],OuterColor,4*sizeof(GLfloat));
+    memcpy(blockbuffer + offset[2],&InnerRadius,1*sizeof(GLfloat));
+    memcpy(blockbuffer + offset[3],&OuterRadius,1*sizeof(GLfloat));
+
+
+    glGenBuffers(1,&ubo);
+    glBindBuffer(GL_UNIFORM_BUFFER,ubo);
+    glBufferData(GL_UNIFORM_BUFFER,blocksize,blockbuffer,GL_DYNAMIC_DRAW);
+    glBindBufferBase(GL_UNIFORM_BUFFER,blockIndex,ubo);
 }
 
 void Page38::update()
@@ -101,4 +126,9 @@ void Page38::draw()
 void Page38::dispose()
 {
     delete program;
+    glDeleteBuffers(1,&ebo);
+    glDeleteBuffers(1,&vbo);
+    glDeleteBuffers(1,&ubo);
+    glDeleteVertexArrays(1,&vao);
+
 }

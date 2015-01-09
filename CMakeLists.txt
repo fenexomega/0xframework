@@ -1,12 +1,13 @@
 project(0xframework CXX C)
 cmake_minimum_required(VERSION 2.8)
 include(sources.cmake)
+include(files.cmake)
 set(SRC_LIST ${ENGINE_SOURCES} ${GAME_SHADERS} ${ENGINE_HEADERS})
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeInclude)
-set(CMAKE_BUILD_TYPE Debug CACHE STRING "Type of build: release of debug" )
+set(CMAKE_BUILD_TYPE Debug CACHE STRING "Type of build: release of debug" FORCE)
 
 
-file(COPY ${GAME_SHADERS} DESTINATION ${CMAKE_CURRENT_BINARY_DIR} )
+file(COPY ${GAME_SHADERS} ${TEXTURES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR} )
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
@@ -25,6 +26,7 @@ add_executable(${CMAKE_PROJECT_NAME} ${SRC_LIST})
 
 # If using g++, we need to set the c++11 standart and
 # the -rdynamic flag for backtrace.
+set(CMAKE_CXX_FLAGS "-std=c++11")
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     message("Compiller is GNU. Using the needed flags")
     set(CMAKE_CXX_FLAGS "-std=c++11 -rdynamic")

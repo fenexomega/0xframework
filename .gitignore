@@ -29,3 +29,4 @@ install_manifest.txt
 *.app
 0xframework*
 build/
+CMakeLists.txt.user

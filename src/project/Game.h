@@ -19,7 +19,6 @@ public:
 
 	virtual void dispose() = 0;
 
-
 };
 
 #endif
