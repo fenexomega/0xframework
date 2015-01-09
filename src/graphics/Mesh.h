@@ -1,10 +1,15 @@
 #ifndef MESH_H
 #define MESH_H
 
+#include <iostream>
+
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
+#include "Texture.h"
+
 #define MAX_VBS 16
+
 
 class Mesh
 {
@@ -13,6 +18,8 @@ private:
     GLuint nbrOfElem;
     glm::mat4 model;
     static GLuint modelAttrib;
+    Texture * texture;
+    glm::vec4 color;
 
     enum
     {
@@ -24,7 +31,7 @@ private:
     GLuint vbo[MAX_VBS];
 
 public:
-    Mesh(GLfloat *vertex, GLuint _nbrOfElem );
+    Mesh(GLfloat *vertex, GLuint _nbrOfElem , glm::vec4 _color);
     ~Mesh();
 
     void const draw();

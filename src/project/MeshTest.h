@@ -7,6 +7,7 @@
 #include "graphics/Window.h"
 #include <glm/glm.hpp>
 #include "graphics/Mesh.h"
+#include "graphics/Camera.h"
 
 
 class MeshTest : public Game
@@ -18,7 +19,7 @@ private:
     GLProgram *program;
     glm::mat4 view,proj;
     std::vector<Mesh *> meshes;
-    GLuint projAttrib,viewAttrib;
+    Camera *cam;
 protected:
 
 public:
