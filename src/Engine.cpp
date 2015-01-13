@@ -17,17 +17,20 @@ void Engine::InitSystems()
     win.CreateWindow(800,600,"0xframework");
     SysGraphics::getGlInfo();
 
+    //Automaticamente chmará esse função
+    //na Saída.
+    atexit(DisposeSystems);
 
 
 }
 
-void Engine::DisposeSystems(int signal)
+void Engine::DisposeSystems()
 {
     LOG("Disposing Systems");
     SysGraphics::dispose();
     LOG("Done.");
     Logger::CloseLogFile();
-    exit(signal);
+    exit(0);
 
 }
 

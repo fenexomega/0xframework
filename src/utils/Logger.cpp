@@ -5,6 +5,22 @@
 
 #define PRINT(x)  std::cout << x << std::endl
 
+std::string operator+(std::string stg, double var)
+{
+    return stg + TOSTR(var);
+}
+
+std::string operator+(std::string stg, float var)
+{
+    return stg + TOSTR(var);
+}
+
+std::string operator+(std::string stg, int var)
+{
+    return stg + TOSTR(var);
+}
+
+
 
 Logger::Logger()
 {
@@ -73,5 +89,5 @@ void Logger::signalCallbackHandler(int signum)
 	for(auto bt : vec)
 		delete bt;
 	
-	EXIT(signum);
+    EXIT();
 }

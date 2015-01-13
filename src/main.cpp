@@ -8,6 +8,5 @@ int main()
 {
     Engine::InitSystems();
     Engine::Run(new MeshTest);
-    Engine::DisposeSystems(EXIT_SUCCESS);
 	return 0;
 }

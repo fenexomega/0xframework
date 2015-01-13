@@ -1,17 +1,17 @@
-#ifndef GLPROGRAM_H
-#define GLPROGRAM_H
+#ifndef PROGRAM_H
+#define PROGRAM_H
 
 
 #include "graphics/GLShader.h"
 #include <vector>
 
-class GLProgram
+class Program
 {
 private:
     GLuint programID;
     std::vector<GLShader *> shaderList;
 public:
-    GLProgram();
+    Program();
 
     void AttachShader(GLShader *shdr);
 
@@ -31,6 +31,8 @@ public:
 
     void BindFragDataLocation(std::string frag,GLuint colorNumber);
 
+    const GLint getUniformLocation(std::string loc) const;
+
     const GLuint getId()
     {
         return programID;
@@ -43,7 +45,7 @@ public:
 //        return ofs;
 //    }
 
-    ~GLProgram();
+    ~Program();
 
 };
 

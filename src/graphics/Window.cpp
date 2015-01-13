@@ -90,7 +90,7 @@ void Window::CreateWindow(int _width, int _height, std::string title, bool isFul
     if(glewInit() != GLEW_OK)
     {
        LOG("Couldn't Initialize Glew. Exiting");
-       EXIT(-1);
+       EXIT();
     }
 
     glViewport(0,0,width,height);

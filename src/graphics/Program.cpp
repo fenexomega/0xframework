@@ -1,38 +1,38 @@
-#include "GLProgram.h"
+#include "Program.h"
 
 #include <memory>
 #include "utils/Logger.h"
 
-GLProgram::GLProgram()
+Program::Program()
 {
     this->programID = glCreateProgram();
 }
 
-void GLProgram::AttachShader(GLShader* shdr)
+void Program::AttachShader(GLShader* shdr)
 {
     shaderList.push_back(shdr);
     glAttachShader(programID,shdr->getShaderId());
 
 }
 
-void GLProgram::Use()
+void Program::Use()
 {
     glUseProgram(programID);
 }
 
-void GLProgram::Link()
+void Program::Link()
 {
     glLinkProgram(programID);
 }
 
-GLint GLProgram::getAttrib(std::string attrib)
+GLint Program::getAttrib(std::string attrib)
 {
     // Não esquecer de habilitar os attribs com
     // glEnableVertexAttribArray(attrib)
     return glGetAttribLocation(programID,attrib.c_str());
 }
 
-GLint GLProgram::EnableAttrib(std::string attrib)
+GLint Program::EnableAttrib(std::string attrib)
 {
     GLint num = getAttrib(attrib);
     if(num == -1)
@@ -45,7 +45,7 @@ GLint GLProgram::EnableAttrib(std::string attrib)
 
 }
 
-GLint GLProgram::DisableAttrib(std::string attrib)
+GLint Program::DisableAttrib(std::string attrib)
 {
     GLint num = getAttrib(attrib);
     if(num == -1)
@@ -59,7 +59,7 @@ GLint GLProgram::DisableAttrib(std::string attrib)
 
 }
 
-void GLProgram::PrintActiveVertexInput()
+void Program::PrintActiveVertexInput()
 {
     GLint maxLenght, nAttribs;
     glGetProgramiv(programID,GL_ACTIVE_ATTRIBUTES,&nAttribs);
@@ -83,7 +83,7 @@ void GLProgram::PrintActiveVertexInput()
 
 }
 
-void GLProgram::PrintActiveUniforms()
+void Program::PrintActiveUniforms()
 {
     GLint maxLenght, nAttribs;
     glGetProgramiv(programID,GL_ACTIVE_UNIFORMS,&nAttribs);
@@ -107,12 +107,17 @@ void GLProgram::PrintActiveUniforms()
 }
 
 
-void GLProgram::BindFragDataLocation(std::string frag,GLuint colorNumber)
+void Program::BindFragDataLocation(std::string frag,GLuint colorNumber)
 {
     glBindFragDataLocation(programID,colorNumber,frag.c_str());
 }
 
-GLProgram::~GLProgram()
+const GLint Program::getUniformLocation(std::string loc) const
+{
+    return glGetUniformLocation(programID,loc.c_str());
+}
+
+Program::~Program()
 {
     for(auto i : shaderList)
     {

@@ -9,7 +9,7 @@
 #include "Engine.h"
 
 #define LOGFILE "output.txt"
-#define EXIT(i) Engine::DisposeSystems(i)
+#define EXIT() Engine::DisposeSystems()
 #define LOG(x) Logger::Log(x)
 #define TOSTR(x) std::to_string(x)
 #define ERROR(x) std::cerr << x << std::endl

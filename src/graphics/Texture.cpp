@@ -7,10 +7,28 @@ Texture::Texture(const std::string filename)
 {
     SDL_Surface *image = IMG_Load(filename.c_str());
 
+    SDL_LockSurface(image);
     if(image == NULL)
     {
         LOG("Couldn't load the image " + filename + ". Quiting.");
-        EXIT(-2);
+        EXIT();
+    }
+
+    GLenum texture_format;
+    // get the number of channels in the SDL image
+    auto nOfColors = image->format->BytesPerPixel;
+    if (nOfColors == 4)     // contains an alpha channel
+    {
+        if (image->format->Rmask == 0x000000ff)
+            texture_format = GL_RGBA;
+        else
+            texture_format = GL_BGRA;
+    } else if (nOfColors == 3)     // no alpha channel
+    {
+        if (image->format->Rmask == 0x000000ff)
+            texture_format = GL_RGB;
+        else
+            texture_format = GL_BGR;
     }
 
     glGenTextures(1,&textureId);
@@ -22,8 +40,7 @@ Texture::Texture(const std::string filename)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,image->w,image->h,0,GL_RGBA,GL_UNSIGNED_BYTE,image->pixels);
-
+    glTexImage2D(GL_TEXTURE_2D,0,texture_format,image->w,image->h,0,texture_format,GL_UNSIGNED_BYTE,image->pixels);
 
     SDL_FreeSurface(image);
 

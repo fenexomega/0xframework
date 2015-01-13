@@ -6,7 +6,7 @@
 #include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
 
-#include "graphics/GLProgram.h"
+#include "graphics/Program.h"
 
 using glm::vec3;
 using glm::mat4;
@@ -16,12 +16,16 @@ class Camera
 private:
     vec3 eye,center,up;
     mat4 view,proj;
-    GLuint projAttrib,viewAttrib;
+    GLuint projAttrib,viewAttrib,modelAttrib;
     GLfloat rotation; //in rads
 public:
+    void Update();
     void Translate(GLfloat x, GLfloat y,GLfloat z);
-    Camera(vec3 _eye, vec3 _center, vec3 _up, GLProgram *program, GLfloat FOV);
+    void Rotate(GLfloat angle, glm::vec3 rot);
+    void Move(GLfloat right, GLfloat up, GLfloat front);
+    Camera(vec3 _eye, vec3 _center, vec3 _up, Program *program, GLfloat FOV);
     ~Camera();
+    void Translate(glm::vec3 vec);
 };
 
 #endif // CAMERA_H

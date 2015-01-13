@@ -12,7 +12,7 @@ private:
     Engine();
     ~Engine();
 public:
-    static void DisposeSystems(int signal);
+    static void DisposeSystems();
     static void InitSystems();
     static void Run(Game *game);
     static void CreateWindow(int width,int height,std::string title);

@@ -1,9 +1,9 @@
-#ifndef MESHTEST
-#define MESHTEST
+#ifndef MESHTEST_H
+#define MESHTEST_H
 
 #include "Game.h"
 #include <iostream>
-#include "graphics/GLProgram.h"
+#include "graphics/Program.h"
 #include "graphics/Window.h"
 #include <glm/glm.hpp>
 #include "graphics/Mesh.h"
@@ -16,7 +16,7 @@ private:
  	GLuint vao;
 	GLuint vbo;
     GLuint ebo;
-    GLProgram *program;
+    Program *program;
     glm::mat4 view,proj;
     std::vector<Mesh *> meshes;
     Camera *cam;

@@ -42,7 +42,7 @@ void MyGame::init()
     glBindBuffer(GL_ARRAY_BUFFER,vbo);
     glBufferData(GL_ARRAY_BUFFER,sizeof(vertex),vertex,GL_STATIC_DRAW);
 
-    program = new GLProgram();
+    program = new Program();
     program->AttachShader(new GLShader("vertex.glsl",GL_VERTEX_SHADER));
     program->AttachShader(new GLShader("fragment.glsl",GL_FRAGMENT_SHADER));
     program->BindFragDataLocation("finalColor",0);

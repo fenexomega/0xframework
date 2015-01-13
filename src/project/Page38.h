@@ -2,7 +2,7 @@
 #define PAGE38_H
 
 #include "Game.h"
-#include "graphics/GLProgram.h"
+#include "graphics/Program.h"
 #include <glm/glm.hpp>
 
 
@@ -10,7 +10,7 @@ class Page38 : public Game
 {
 private:
     glm::mat4 proj,view;
-    GLProgram *program;
+    Program *program;
     GLuint vbo,vao,ebo;
     GLuint blockIndex,ubo;
 public:

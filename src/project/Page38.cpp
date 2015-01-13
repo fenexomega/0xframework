@@ -53,7 +53,7 @@ void Page38::init()
     glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(elements),elements,GL_STATIC_DRAW);
 
 
-    program = new GLProgram();
+    program = new Program();
     program->AttachShader(new GLShader("vertexPage38.glsl",GL_VERTEX_SHADER));
     program->AttachShader(new GLShader("fragmentPage38.glsl",GL_FRAGMENT_SHADER));
     program->BindFragDataLocation("finalColor",0);

@@ -3,7 +3,7 @@
 
 #include "Game.h"
 #include <iostream>
-#include "graphics/GLProgram.h"
+#include "graphics/Program.h"
 #include "graphics/Window.h"
 #include <glm/glm.hpp>
 
@@ -14,7 +14,7 @@ private:
  	GLuint vao;
 	GLuint vbo;
     GLuint ebo;
-    GLProgram *program;
+    Program *program;
     glm::mat4 view,proj;
 
 protected:
