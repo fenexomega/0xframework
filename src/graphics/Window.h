@@ -2,12 +2,12 @@
 #define WINDOW_H
 
 #include "GlobalDef.h"
-
 #include <GL/glew.h>
-
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 
+namespace ox
+{
 class Window
 {
 private:
@@ -27,5 +27,8 @@ public:
     static int getHeight();
     static void setHeight(int value);
 };
+
+}
+
 
 #endif // WINDOW_H

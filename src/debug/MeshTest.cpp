@@ -32,92 +32,102 @@ void MeshTest::init()
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
-//    vector<GLfloat> positions = {
-//        0.0f,1.0f,0.0f,
-//        1.0f,0.0f,0.0f,
-//        -1.0f,0.0f,0.0f
-//    };
+    //    vector<GLfloat> positions = {
+    //        0.0f,1.0f,0.0f,
+    //        1.0f,0.0f,0.0f,
+    //        -1.0f,0.0f,0.0f
+    //    };
 
 
-//    vector<GLfloat> positions2 = {
-//        0.0f,1.0f,0.5f,
-//        1.0f,0.0f,0.5f,
-//        -1.0f,0.0f,0.5f
-//    };
+    //    vector<GLfloat> positions2 = {
+    //        0.0f,1.0f,0.5f,
+    //        1.0f,0.0f,0.5f,
+    //        -1.0f,0.0f,0.5f
+    //    };
 
 
 
 
 
-//   vector<GLfloat> color = {
-//       0.0f,1.0f,0.0f,1.0f,
-//       1.0f,0.0f,0.0f,1.0f,
-//       1.0f,0.0f,0.0f,1.0f
-//   };
+    //   vector<GLfloat> color = {
+    //       0.0f,1.0f,0.0f,1.0f,
+    //       1.0f,0.0f,0.0f,1.0f,
+    //       1.0f,0.0f,0.0f,1.0f
+    //   };
 
-//   vector<GLfloat> color2 = {
-//       0.0f,1.0f,0.5f,1.0f,
-//       1.0f,0.0f,0.5f,1.0f,
-//       1.0f,0.0f,0.5f,1.0f,
-//   };
+    //   vector<GLfloat> color2 = {
+    //       0.0f,1.0f,0.5f,1.0f,
+    //       1.0f,0.0f,0.5f,1.0f,
+    //       1.0f,0.0f,0.5f,1.0f,
+    //   };
 
     vector<GLfloat>  pos = {
-         10.0f,-5.0f,2.0f,
-        -10.0f,-5.0f,2.0f,
-        -10.0f, 5.0f,2.0f,
-         10.0f, 5.0f,2.0f,
-     };
+        10.0f, 5.0f,-2.0f,
+        -10.0f, 5.0f,-2.0f,
+        -10.0f,-5.0f,-2.0f,
+        10.0f,-5.0f,-2.0f,
+    };
 
 
-   vector<GLfloat>  color = {
+    vector<GLfloat>  color = {
         0.7f,0.3f,0.1f,1.0f,
         0.7f,0.3f,0.1f,1.0f,
         0.7f,0.3f,0.1f,1.0f,
         0.7f,0.3f,0.1f,1.0f,
     };
 
-   vector<GLfloat> texcoord = {
-       6.0f,6.0f,
-       0.0f,6.0f,
-       0.0f,0.0f,
-       6.0f,0.0f
-   };
+    vector<GLfloat> texcoord = {
+        6.0f,6.0f,
+        0.0f,6.0f,
+        0.0f,0.0f,
+        6.0f,0.0f
+    };
 
-   vector<GLuint> elements = {
+    vector<GLuint> elements = {
         0,1,2,
         2,3,0
-   };
+    };
+
+    vector<GLfloat> normals = {
+        0.0f,0.0f,1.0f,
+        0.0f,0.0f,1.0f,
+        0.0f,0.0f,1.0f,
+        0.0f,0.0f,1.0f
+
+    };
 
 
     program = new Program();
-    program->AttachShader(new GLShader("vertexMeshTest.glsl",GL_VERTEX_SHADER));
-    program->AttachShader(new GLShader("fragmentMeshTest.glsl",GL_FRAGMENT_SHADER));
+    program->AttachShader(new Shader("vertexMeshTest.glsl",GL_VERTEX_SHADER));
+    program->AttachShader(new Shader("fragmentMeshTest.glsl",GL_FRAGMENT_SHADER));
     program->BindFragDataLocation("finalColor",0);
 
     program->Link();
     program->Use();
 
+    glPointSize(6.0f);
 
     GLuint modelAttrib = program->getUniformLocation("model");
 
-//    meshes.push_back(new Mesh(positions,color));
-//    meshes.push_back(new Mesh(positions2,color2));
-//    meshes.push_back(new Mesh("cube.obj","bricks.png",glm::vec4(1,1,1,1)));
+    //    meshes.push_back(new Mesh(positions,color));
+    //    meshes.push_back(new Mesh(positions2,color2));
+    //   meshes.push_back(new Mesh("cube.obj","bricks.png",glm::vec4(1,1,1,1)));
     meshes.push_back(new Mesh("monkey3.obj","bricks.png",glm::vec4(1,1,1,1)));
-    meshes.push_back(new Mesh(pos,color,elements,texcoord,"bricks.png"));
-//    meshes.push_back(new Mesh("steve.obj","steve.png",glm::vec4(1,1,1,1)));
-//      meshes.push_back(new Mesh("ghv.obj","ghv-RGBA.png",glm::vec4(1,1,1,1)));
+    meshes.push_back(new Mesh(pos,elements,texcoord,"bricks.png",color,normals));
+    //    meshes.push_back(new Mesh("steve.obj","steve.png",glm::vec4(1,1,1,1)));
+    //      meshes.push_back(new Mesh("ghv.obj","ghv-RGBA.png",glm::vec4(1,1,1,1)));
     meshes.at(0)->setModelAttrib(modelAttrib);
 
-    cam = new Camera(glm::vec3(0,0.5f,-5.5f),
+    cam = new Camera(glm::vec3(0,0.0f,2.5f),
                      glm::vec3(0,0,0),
-                     glm::vec3(0,1,0),program,45.0f);
+                     glm::vec3(0,1,0),
+                     program,45.0f);
 
-//    program->PrintActiveVertexInput();
-//    program->PrintActiveUniforms();
+    program->PrintActiveVertexInput();
+    program->PrintActiveUniforms();
 
     Transform trans;
-    trans.rotate(0.01f,0,1,0);
+    //    trans.rotate(0.005f,0,1,0);
 
     meshes[0]->setTransform(trans);
 
@@ -125,7 +135,7 @@ void MeshTest::init()
 
 }
 
-void MeshTest::update()
+void MeshTest::update(double delta)
 {
     static GLfloat i = 0;
 
@@ -150,14 +160,14 @@ void MeshTest::update()
     if(sysInput::isKeyPressed(SDL_SCANCODE_LCTRL))
         cam->Move(0,0.05,0);
     if(sysInput::isKeyPressed(SDL_SCANCODE_Q))
-        cam->Rotate(0.1f,glm::vec3(0,1,0));
+        cam->Rotate(-0.05f,glm::vec3(0,1,0));
     if(sysInput::isKeyPressed(SDL_SCANCODE_E))
-        cam->Rotate(-0.1f,  glm::vec3(0,1,0));
+        cam->Rotate(0.05f,  glm::vec3(0,1,0));
 
-
+    cam->Update();
 }
 
-void MeshTest::draw() 
+void MeshTest::draw(double delta)
 {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -180,4 +190,3 @@ void MeshTest::dispose()
     for(auto i : meshes)
         delete i;
 }
-

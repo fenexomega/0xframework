@@ -54,8 +54,8 @@ void Page38::init()
 
 
     program = new Program();
-    program->AttachShader(new GLShader("vertexPage38.glsl",GL_VERTEX_SHADER));
-    program->AttachShader(new GLShader("fragmentPage38.glsl",GL_FRAGMENT_SHADER));
+    program->AttachShader(new Shader("vertexPage38.glsl",GL_VERTEX_SHADER));
+    program->AttachShader(new Shader("fragmentPage38.glsl",GL_FRAGMENT_SHADER));
     program->BindFragDataLocation("finalColor",0);
 
     program->Link();

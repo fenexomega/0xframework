@@ -3,12 +3,15 @@
 #include <memory>
 #include "utils/Logger.h"
 
+using namespace ox;
+
+
 Program::Program()
 {
     this->programID = glCreateProgram();
 }
 
-void Program::AttachShader(GLShader* shdr)
+void Program::AttachShader(Shader* shdr)
 {
     shaderList.push_back(shdr);
     glAttachShader(programID,shdr->getShaderId());

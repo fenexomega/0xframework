@@ -2,9 +2,9 @@
 #define SYSGRAPHICS_H
 
 #include "GlobalDef.h"
-#include "graphics/Window.h"
 
-
+namespace ox
+{
 class SysGraphics
 {
 public:
@@ -16,5 +16,5 @@ public:
     // Sys interface
 private:
 };
-
+}
 #endif // SYSGRAPHICS_H

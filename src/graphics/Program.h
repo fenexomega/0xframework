@@ -2,18 +2,20 @@
 #define PROGRAM_H
 
 
-#include "graphics/GLShader.h"
+#include "graphics/Shader.h"
 #include <vector>
 
+namespace ox
+{
 class Program
 {
 private:
     GLuint programID;
-    std::vector<GLShader *> shaderList;
+    std::vector<Shader *> shaderList;
 public:
     Program();
 
-    void AttachShader(GLShader *shdr);
+    void AttachShader(Shader *shdr);
 
     void Use();
 
@@ -48,5 +50,5 @@ public:
     ~Program();
 
 };
-
+}
 #endif // GLPROGRAM_H

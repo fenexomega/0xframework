@@ -1,12 +1,13 @@
 #ifndef MYGAME
 #define MYGAME
 
-#include "Game.h"
+#include "project/Game.h"
 #include <iostream>
 #include "graphics/Program.h"
 #include "graphics/Window.h"
 #include <glm/glm.hpp>
 
+using namespace ox;
 
 class MyGame : public Game
 {

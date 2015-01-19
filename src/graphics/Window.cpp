@@ -1,4 +1,5 @@
 #include "Window.h"
+using namespace ox;
 
 
 SDL_Window *Window::SDLwindow;

@@ -2,10 +2,39 @@
 
 #include <SDL2/SDL_image.h>
 #include "utils/Logger.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_opengl.h>
 
+
+using namespace ox;
+
+
+float Texture::getW() const
+{
+    return w;
+}
+
+void Texture::setW(float value)
+{
+    w = value;
+}
+
+float Texture::getH() const
+{
+    return h;
+}
+
+void Texture::setH(float value)
+{
+    h = value;
+}
 Texture::Texture(const std::string filename)
 {
     SDL_Surface *image = IMG_Load(filename.c_str());
+
+    w = image->w;
+    h = image->h;
+
 
     SDL_LockSurface(image);
     if(image == NULL)

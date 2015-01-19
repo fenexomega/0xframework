@@ -10,7 +10,8 @@
 using namespace std;
 
 
-
+namespace ox
+{
 #define NUM_KEYCODES 512
 static const Uint8 * keys;
 static const Uint8 * mouseKeys;
@@ -53,5 +54,5 @@ public:
 //    static std::string getText();
 
 };
-
+}
 #endif // INPUT_H

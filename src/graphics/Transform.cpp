@@ -2,6 +2,9 @@
 
 #include <glm/gtx/transform.hpp>
 
+using namespace ox;
+
+
 vec3 &Transform::pos()
 {
     return m_pos;

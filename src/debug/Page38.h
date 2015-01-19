@@ -1,9 +1,11 @@
 #ifndef PAGE38_H
 #define PAGE38_H
 
-#include "Game.h"
+#include "project/Game.h"
 #include "graphics/Program.h"
 #include <glm/glm.hpp>
+
+using namespace ox;
 
 
 class Page38 : public Game

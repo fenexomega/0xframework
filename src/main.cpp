@@ -1,8 +1,8 @@
-#include <iostream>
 #include "Engine.h"
-#include "project/MyGame.h"
-#include "project/Page38.h"
-#include "project/MeshTest.h"
+#include "debug/MyGame.h"
+#include "debug/Page38.h"
+#include "debug/MeshTest.h"
+#include "debug/GeometryShaderTest.h"
 
 int main()
 {

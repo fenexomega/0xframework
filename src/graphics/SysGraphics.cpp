@@ -1,5 +1,10 @@
 #include "graphics/SysGraphics.h"
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_opengl.h>
+
+using namespace ox;
+
 SysGraphics::SysGraphics()
 {
 

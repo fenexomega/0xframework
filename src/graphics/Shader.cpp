@@ -1,8 +1,9 @@
-#include "graphics/GLShader.h"
+#include "graphics/Shader.h"
 #include "utils/Logger.h"
 
+using namespace ox;
 
-const std::string GLShader::ReadContentFromFile(std::string filename)
+const std::string Shader::ReadContentFromFile(std::string filename)
 {
     std::fstream f(filename.c_str());
     if(f == NULL)
@@ -20,7 +21,7 @@ const std::string GLShader::ReadContentFromFile(std::string filename)
     return content;
 }
 
-GLShader::GLShader(std::string _filename,GLenum shaderType) : filename(_filename)
+Shader::Shader(std::string _filename,GLenum shaderType) : filename(_filename)
 {
     this->shaderID = glCreateShader(shaderType);
     compilationErrors = NULL;
@@ -32,7 +33,7 @@ GLShader::GLShader(std::string _filename,GLenum shaderType) : filename(_filename
 
 }
 
-void GLShader::ReadErrors()
+void Shader::ReadErrors()
 {
     GLint result;
     glGetShaderiv(shaderID, GL_COMPILE_STATUS, &result);
@@ -57,7 +58,7 @@ void GLShader::ReadErrors()
 }
 
 
-GLShader::~GLShader()
+Shader::~Shader()
 {
     glDeleteShader(shaderID);
     if(!compilationErrors)

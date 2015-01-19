@@ -1,6 +1,7 @@
 #include "sysInput.h"
 
 
+using namespace ox;
 
 void sysInput::update()
 {

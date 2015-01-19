@@ -3,7 +3,7 @@
 #include <signal.h>
 #include <execinfo.h>
 
-#define PRINT(x)  std::cout << x << std::endl
+using namespace ox;
 
 std::string operator+(std::string stg, double var)
 {
@@ -75,6 +75,7 @@ void Logger::generateBackTrace(std::vector<char *> &vec)
 		vec.push_back(logTrace[i]);
 
 }
+
 
 void Logger::signalCallbackHandler(int signum)
 {

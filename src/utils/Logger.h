@@ -13,7 +13,10 @@
 #define LOG(x) Logger::Log(x)
 #define TOSTR(x) std::to_string(x)
 #define ERROR(x) std::cerr << x << std::endl
+#define PRINT(x)  std::cout << x << std::endl
 
+namespace ox
+{
 static std::ofstream logFile;
 
 class Logger
@@ -29,5 +32,5 @@ public:
     static void CreateLogFile();
     static void CloseLogFile();
 };
-
+}
 #endif // LOGGER_H

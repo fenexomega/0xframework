@@ -5,6 +5,8 @@
 #include <glm/gtx/transform.hpp>
 using glm::vec3;
 
+namespace ox
+{
 class Transform
 {
 private:
@@ -44,5 +46,5 @@ public:
     vec3& scale();
     void setScale(const vec3 &scale);
 };
-
+}
 #endif // TRANSFORM_H

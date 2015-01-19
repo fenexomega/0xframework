@@ -7,8 +7,9 @@
 
 #include <iostream>
 
-
-class GLShader
+namespace ox
+{
+class Shader
 {
 private:
     std::string filename;
@@ -19,7 +20,7 @@ private:
     const std::string ReadContentFromFile(std::string filename);
 
 public:
-    GLShader(std::string filename,GLenum shaderType);
+    Shader(std::string filename,GLenum shaderType);
 
     const int getShaderId()
     {
@@ -31,7 +32,7 @@ public:
         return compilationErrors;
     }
 
-    ~GLShader();
+    ~Shader();
 };
-
+}
 #endif // GLSHADER_H
